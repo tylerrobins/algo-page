@@ -1,9 +1,7 @@
-import SortingVisualiser from './sorting-visualiser'
+import SortingVisualiser from "./SortingVisualiser";
 
 function App() {
-  return (
-    <SortingVisualiser/>
-  )
+  return <SortingVisualiser />;
 }
 
-export default App
+export default App;
