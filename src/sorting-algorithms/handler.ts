@@ -11,11 +11,16 @@ const handler = (
 ) => {
   const sortSteps = (idx: number) => {
     const dispatcherJob = dispatcherArray[idx];
-    setArray(dispatcherJob[0]);
-    setGreyIdxs(dispatcherJob[1]);
-    setOrangeIdx(dispatcherJob[2]);
-    setGreenIdx(dispatcherJob[3]);
-    setRedIdx(dispatcherJob[4]);
+    // setArray(dispatcherJob[0]);
+    // setGreyIdxs(dispatcherJob[1]);
+    // setOrangeIdx(dispatcherJob[2]);
+    // setGreenIdx(dispatcherJob[3]);
+    // setRedIdx(dispatcherJob[4]);
+    setArray(dispatcherJob.getCurrentArr());
+    setGreyIdxs(dispatcherJob.getColor("grey"));
+    setOrangeIdx(dispatcherJob.getColor("orange"));
+    setGreenIdx(dispatcherJob.getColor("green"));
+    setRedIdx(dispatcherJob.getColor("red"));
   };
 
   const n = dispatcherArray.length;

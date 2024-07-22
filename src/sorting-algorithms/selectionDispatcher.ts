@@ -1,3 +1,4 @@
+import Dispatch from "./dispatch";
 import { DispatcherArray } from "./types";
 
 const selectionDispatcher = (array: number[]): DispatcherArray => {
@@ -10,13 +11,22 @@ const selectionDispatcher = (array: number[]): DispatcherArray => {
       if (currArray[j] < currArray[currValIdx]) {
         currValIdx = j;
       }
-      dispatcher.push([
-        [...currArray],
-        [...Array(i).keys()],
-        [i],
-        [j],
-        [currValIdx],
-      ]);
+      // dispatcher.push([
+      //   [...currArray],
+      //   [...Array(i).keys()],
+      //   [i],
+      //   [j],
+      //   [currValIdx],
+      // ]);
+      dispatcher.push(
+        new Dispatch(
+          [...currArray],
+          [...Array(i).keys()],
+          [j],
+          [currValIdx],
+          [i]
+        )
+      );
     }
     if (currValIdx !== i) {
       [[currArray[i], currArray[currValIdx]]] = [
@@ -24,7 +34,10 @@ const selectionDispatcher = (array: number[]): DispatcherArray => {
       ];
     }
   }
-  dispatcher.push([[...currArray], [...Array(n).keys()], [], [], []]);
+  // dispatcher.push([[...currArray], [...Array(n).keys()], [], [], []]);
+  dispatcher.push(
+    new Dispatch([...currArray], [...Array(n).keys()], [], [], [])
+  );
   return dispatcher;
 };
 
