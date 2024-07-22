@@ -5,6 +5,7 @@ import selectionDispatcher from "../sorting-algorithms/selectionDispatcher";
 import bubbleDispatcher from "../sorting-algorithms/bubbleDispatcher";
 import insertDispatcher from "../sorting-algorithms/insertDispatcher";
 import mergeDispatcher from "../sorting-algorithms/mergeDispatcher";
+import quickDispatcher from "../sorting-algorithms/quickDispatcher";
 
 function SortingVisualiser() {
   const [array, setArray] = useState<number[]>([]);
@@ -57,6 +58,7 @@ function SortingVisualiser() {
       12
     );
   };
+
   const mergeSortHandler = () => {
     const dispatcher = mergeDispatcher(array);
     handler(
@@ -67,6 +69,19 @@ function SortingVisualiser() {
       setGreenIdx,
       setOrangeIdx,
       30
+    );
+  };
+
+  const quickSortHandler = () => {
+    const dispatcher = quickDispatcher(array);
+    handler(
+      dispatcher,
+      setArray,
+      setGreyIdxs,
+      setRedIdx,
+      setGreenIdx,
+      setOrangeIdx,
+      50
     );
   };
 
@@ -115,6 +130,12 @@ function SortingVisualiser() {
             onClick={mergeSortHandler}
           >
             Merge Sort
+          </button>
+          <button
+            className="m-1 p-2 border-2 border-black rounded-lg"
+            onClick={quickSortHandler}
+          >
+            Quick Sort
           </button>
         </div>
       </div>
