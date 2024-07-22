@@ -1,3 +1,4 @@
+import { MutableRefObject } from "react";
 import { DispatcherArray } from "./types";
 
 const handler = (
@@ -7,15 +8,20 @@ const handler = (
   setRedIdx: React.Dispatch<React.SetStateAction<number[]>>,
   setGreenIdx: React.Dispatch<React.SetStateAction<number[]>>,
   setOrangeIdx: React.Dispatch<React.SetStateAction<number[]>>,
+  stopSortingRef: MutableRefObject<boolean>,
   sortingSpeed: number
 ) => {
+  const timeouts: NodeJS.Timeout[] = [];
+
   const sortSteps = (idx: number) => {
+    if (stopSortingRef.current) {
+      setGreyIdxs([]);
+      setOrangeIdx([]);
+      setGreenIdx([]);
+      setRedIdx([]);
+      return;
+    }
     const dispatcherJob = dispatcherArray[idx];
-    // setArray(dispatcherJob[0]);
-    // setGreyIdxs(dispatcherJob[1]);
-    // setOrangeIdx(dispatcherJob[2]);
-    // setGreenIdx(dispatcherJob[3]);
-    // setRedIdx(dispatcherJob[4]);
     setArray(dispatcherJob.getCurrentArr());
     setGreyIdxs(dispatcherJob.getColor("grey"));
     setOrangeIdx(dispatcherJob.getColor("orange"));
@@ -25,9 +31,14 @@ const handler = (
 
   const n = dispatcherArray.length;
   for (let i = 0; i < n; i++) {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       sortSteps(i);
     }, i * sortingSpeed);
+    timeouts.push(timeout);
   }
+
+  return () => {
+    timeouts.forEach((timeout) => clearTimeout(timeout));
+  };
 };
 export default handler;
