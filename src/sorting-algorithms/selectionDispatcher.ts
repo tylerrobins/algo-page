@@ -1,6 +1,6 @@
-type DispatcherArray = Array<[number[], number[], number, number, number]>;
+import { DispatcherArray } from "./types";
 
-const dispatcher = (array: number[]) => {
+const selectionDispatcher = (array: number[]): DispatcherArray => {
   const currArray = [...array];
   const n = array.length;
   const dispatcher: DispatcherArray = [];
@@ -10,7 +10,13 @@ const dispatcher = (array: number[]) => {
       if (currArray[j] < currArray[currValIdx]) {
         currValIdx = j;
       }
-      dispatcher.push([[...currArray], [...Array(i).keys()], i, j, currValIdx]);
+      dispatcher.push([
+        [...currArray],
+        [...Array(i).keys()],
+        [i],
+        [j],
+        [currValIdx],
+      ]);
     }
     if (currValIdx !== i) {
       [[currArray[i], currArray[currValIdx]]] = [
@@ -18,8 +24,8 @@ const dispatcher = (array: number[]) => {
       ];
     }
   }
-  dispatcher.push([[...currArray], [...Array(n).keys()], -1, -1, -1]);
+  dispatcher.push([[...currArray], [...Array(n).keys()], [], [], []]);
   return dispatcher;
 };
 
-export default dispatcher;
+export default selectionDispatcher;

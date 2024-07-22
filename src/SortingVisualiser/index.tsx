@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { generateArr } from "../functions/generate-array";
-import {
-  selectionDispatcher,
-  selectionHandler,
-} from "../sorting-algorithms/selection-sort";
-import "./style.css";
+import generateArr from "../functions/generate-array";
+import handler from "../sorting-algorithms/handler";
+import selectionDispatcher from "../sorting-algorithms/selectionDispatcher";
+import bubbleDispatcher from "../sorting-algorithms/bubbleDispatcher";
+import insertDispatcher from "../sorting-algorithms/insertDispatcher";
+import mergeDispatcher from "../sorting-algorithms/mergeDispatcher";
 
 function SortingVisualiser() {
   const [array, setArray] = useState<number[]>([]);
-  const [redIdx, setRedIdx] = useState<number>(-1);
-  const [greenIdx, setGreenIdx] = useState<number>(-1);
-  const [orangeIdx, setOrangeIdx] = useState<number>(-1);
+  const [redIdx, setRedIdx] = useState<number[]>([]);
+  const [greenIdx, setGreenIdx] = useState<number[]>([]);
+  const [orangeIdx, setOrangeIdx] = useState<number[]>([]);
   const [greyIdxs, setGreyIdxs] = useState<number[]>([]);
 
   useEffect(() => {
@@ -18,43 +18,107 @@ function SortingVisualiser() {
     setArray(genArray);
   }, []);
 
-  const selectionSortDispatcherArr = selectionDispatcher(array);
   const selectionSortHandler = () => {
-    selectionHandler(
-      selectionSortDispatcherArr,
+    const dispatcher = selectionDispatcher(array);
+    handler(
+      dispatcher,
       setArray,
       setGreyIdxs,
       setRedIdx,
       setGreenIdx,
-      setOrangeIdx
+      setOrangeIdx,
+      12
+    );
+  };
+
+  const bubbleSortHandler = () => {
+    const dispatcher = bubbleDispatcher(array);
+    handler(
+      dispatcher,
+      setArray,
+      setGreyIdxs,
+      setRedIdx,
+      setGreenIdx,
+      setOrangeIdx,
+      12
+    );
+  };
+
+  const insertSortHandler = () => {
+    const dispatcher = insertDispatcher(array);
+    console.log(dispatcher);
+    handler(
+      dispatcher,
+      setArray,
+      setGreyIdxs,
+      setRedIdx,
+      setGreenIdx,
+      setOrangeIdx,
+      12
+    );
+  };
+  const mergeSortHandler = () => {
+    const dispatcher = mergeDispatcher(array);
+    handler(
+      dispatcher,
+      setArray,
+      setGreyIdxs,
+      setRedIdx,
+      setGreenIdx,
+      setOrangeIdx,
+      30
     );
   };
 
   return (
-    <>
-      <div className="bar-container">
+    <div className="px-10 py-14">
+      <div className="">
         {array.map((value, idx) => (
           <div
-            className="bar-line"
+            className="inline-block mx-0.5 w-4"
             key={idx}
             style={{
-              backgroundColor:
-                idx === redIdx
-                  ? "green"
-                  : idx === greenIdx
-                  ? "red"
-                  : idx === orangeIdx
-                  ? "orange"
-                  : idx in greyIdxs
-                  ? "grey"
-                  : "black",
+              backgroundColor: redIdx.includes(idx)
+                ? "green"
+                : orangeIdx.includes(idx)
+                ? "orange"
+                : greenIdx.includes(idx)
+                ? "red"
+                : greyIdxs.includes(idx)
+                ? "grey"
+                : "black",
               height: `${value}px`,
             }}
           ></div>
         ))}
+        <div className="">
+          <button
+            className="m-1 p-2 border-2 border-black rounded-lg"
+            onClick={selectionSortHandler}
+          >
+            Selection Sort
+          </button>
+          <button
+            className="m-1 p-2 border-2 border-black rounded-lg"
+            onClick={bubbleSortHandler}
+          >
+            Bubble Sort
+          </button>
+          <button
+            className="m-1 p-2 border-2 border-black rounded-lg"
+            onClick={insertSortHandler}
+          >
+            Insert Sort
+          </button>
+          <button
+            className="m-1 p-2 border-2 border-black rounded-lg"
+            onClick={mergeSortHandler}
+          >
+            Merge Sort
+          </button>
+        </div>
       </div>
-      <button onClick={selectionSortHandler}>Selection Sort</button>
-    </>
+    </div>
   );
 }
 

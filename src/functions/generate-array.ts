@@ -1,4 +1,4 @@
-function generateArr(): number[] {
+export default function generateArr(): number[] {
   const arr = [];
   const length = 75;
   const maxVal = 750;
@@ -9,5 +9,3 @@ function generateArr(): number[] {
   }
   return arr;
 }
-
-export { generateArr };
