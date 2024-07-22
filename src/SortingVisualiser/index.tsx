@@ -81,7 +81,7 @@ function SortingVisualiser() {
       setRedIdx,
       setGreenIdx,
       setOrangeIdx,
-      50
+      30
     );
   };
 
