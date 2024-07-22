@@ -1,5 +1,6 @@
 import { DispatcherArray } from "./types";
 import range from "../functions/arr-range";
+import Dispatch from "./dispatch";
 
 const bubbleDispatcher = (arr: number[]): DispatcherArray => {
   const currArr = [...arr];
@@ -14,28 +15,18 @@ const bubbleDispatcher = (arr: number[]): DispatcherArray => {
       if (currArr[j] > currArr[nextIdx]) {
         [[currArr[j], currArr[nextIdx]]] = [[currArr[nextIdx], currArr[j]]];
         swapped = true;
-        dispatcher.push([
-          [...currArr],
-          range(n - i, n - 1),
-          [],
-          [j],
-          [nextIdx],
-        ]);
+        dispatcher.push(
+          new Dispatch([...currArr], range(n - i, n - 1), [j], [nextIdx], [])
+        );
       } else {
-        dispatcher.push([
-          [...currArr],
-          range(n - i, n - 1),
-          [nextIdx],
-          [],
-          [j],
-        ]);
+        new Dispatch([...currArr], range(n - i, n - 1), [nextIdx], [j], []);
       }
     }
     if (!swapped) {
       break;
     }
   }
-  dispatcher.push([[...currArr], range(0, n), [], [], []]);
+  dispatcher.push(new Dispatch([...currArr], range(0, n)));
   return dispatcher;
 };
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import generateArr from "../functions/generate-array";
 import handler from "../sorting-algorithms/handler";
 import selectionDispatcher from "../sorting-algorithms/selectionDispatcher";
-// import bubbleDispatcher from "../sorting-algorithms/bubbleDispatcher";
+import bubbleDispatcher from "../sorting-algorithms/bubbleDispatcher";
 import insertionDispatcher from "../sorting-algorithms/insertionDispatcher";
 // import mergeDispatcher from "../sorting-algorithms/mergeDispatcher";
 // import quickDispatcher from "../sorting-algorithms/quickDispatcher";
@@ -32,18 +32,18 @@ function SortingVisualiser() {
     );
   };
 
-  // const bubbleSortHandler = () => {
-  //   const dispatcher = bubbleDispatcher(array);
-  //   handler(
-  //     dispatcher,
-  //     setArray,
-  //     setGreyIdxs,
-  //     setRedIdx,
-  //     setGreenIdx,
-  //     setOrangeIdx,
-  //     12
-  //   );
-  // };
+  const bubbleSortHandler = () => {
+    const dispatcher = bubbleDispatcher(array);
+    handler(
+      dispatcher,
+      setArray,
+      setGreyIdxs,
+      setRedIdx,
+      setGreenIdx,
+      setOrangeIdx,
+      15
+    );
+  };
 
   const insertionSortHandler = () => {
     const dispatcher = insertionDispatcher(array);
@@ -113,12 +113,12 @@ function SortingVisualiser() {
           >
             Selection Sort
           </button>
-          {/* <button
+          <button
             className="m-1 p-2 border-2 border-black rounded-lg"
             onClick={bubbleSortHandler}
           >
             Bubble Sort
-          </button> */}
+          </button>
           <button
             className="m-1 p-2 border-2 border-black rounded-lg"
             onClick={insertionSortHandler}
