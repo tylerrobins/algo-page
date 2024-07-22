@@ -4,8 +4,8 @@ import handler from "../sorting-algorithms/handler";
 import selectionDispatcher from "../sorting-algorithms/selectionDispatcher";
 import bubbleDispatcher from "../sorting-algorithms/bubbleDispatcher";
 import insertionDispatcher from "../sorting-algorithms/insertionDispatcher";
-// import mergeDispatcher from "../sorting-algorithms/mergeDispatcher";
-// import quickDispatcher from "../sorting-algorithms/quickDispatcher";
+import mergeDispatcher from "../sorting-algorithms/mergeDispatcher";
+import quickDispatcher from "../sorting-algorithms/quickDispatcher";
 
 function SortingVisualiser() {
   const [array, setArray] = useState<number[]>([]);
@@ -59,31 +59,31 @@ function SortingVisualiser() {
     );
   };
 
-  // const mergeSortHandler = () => {
-  //   const dispatcher = mergeDispatcher(array);
-  //   handler(
-  //     dispatcher,
-  //     setArray,
-  //     setGreyIdxs,
-  //     setRedIdx,
-  //     setGreenIdx,
-  //     setOrangeIdx,
-  //     30
-  //   );
-  // };
+  const mergeSortHandler = () => {
+    const dispatcher = mergeDispatcher(array);
+    handler(
+      dispatcher,
+      setArray,
+      setGreyIdxs,
+      setRedIdx,
+      setGreenIdx,
+      setOrangeIdx,
+      30
+    );
+  };
 
-  // const quickSortHandler = () => {
-  //   const dispatcher = quickDispatcher(array);
-  //   handler(
-  //     dispatcher,
-  //     setArray,
-  //     setGreyIdxs,
-  //     setRedIdx,
-  //     setGreenIdx,
-  //     setOrangeIdx,
-  //     30
-  //   );
-  // };
+  const quickSortHandler = () => {
+    const dispatcher = quickDispatcher(array);
+    handler(
+      dispatcher,
+      setArray,
+      setGreyIdxs,
+      setRedIdx,
+      setGreenIdx,
+      setOrangeIdx,
+      30
+    );
+  };
 
   return (
     <div className="px-10 py-14">
@@ -125,18 +125,18 @@ function SortingVisualiser() {
           >
             Insert Sort
           </button>
-          {/* <button
+          <button
             className="m-1 p-2 border-2 border-black rounded-lg"
             onClick={mergeSortHandler}
           >
             Merge Sort
-          </button> */}
-          {/* <button
+          </button>
+          <button
             className="m-1 p-2 border-2 border-black rounded-lg"
             onClick={quickSortHandler}
           >
             Quick Sort
-          </button> */}
+          </button>
         </div>
       </div>
     </div>

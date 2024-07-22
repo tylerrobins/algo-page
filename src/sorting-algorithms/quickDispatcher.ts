@@ -1,5 +1,6 @@
 import { DispatcherArray } from "./types";
 import range from "../functions/arr-range";
+import Dispatch from "./dispatch";
 
 const quickSort = (
   arr: number[],
@@ -34,17 +35,19 @@ const partition = (
       red = [i, j];
       green = [];
     }
-    dispatcher.push([[...arr], range(low, high), [high], red, green]);
+    dispatcher.push(
+      new Dispatch([...arr], range(low, high), red, green, [high])
+    );
   }
   [arr[i], arr[high]] = [arr[high], arr[i]];
-  dispatcher.push([[...arr], range(low, high), [], [i], []]);
+  dispatcher.push(new Dispatch([...arr], range(low, high), [], [i], []));
   return i;
 };
 
 const quickDispatcher = (arr: number[]): DispatcherArray => {
   const dispatcher: DispatcherArray = [];
   quickSort(arr, dispatcher, 0, arr.length - 1);
-  dispatcher.push([[...arr], range(0, arr.length), [], [], []]);
+  dispatcher.push(new Dispatch([...arr], range(0, arr.length), [], [], []));
   return dispatcher;
 };
 

@@ -1,5 +1,6 @@
 import { DispatcherArray } from "./types";
 import range from "../functions/arr-range";
+import Dispatch from "./dispatch";
 
 class Indexes {
   lowerBound: number;
@@ -50,13 +51,9 @@ const merge = (arr: number[], dispatcher: DispatcherArray, arrIdx: Indexes) => {
     }
     const topRange = range(arrIdx.lowerBound, arrIdx.middle);
     const bottomRange = range(arrIdx.middle + 1, arrIdx.upperBound);
-    dispatcher.push([
-      [...arr],
-      [...topRange, ...bottomRange],
-      [],
-      [red],
-      [green],
-    ]);
+    dispatcher.push(
+      new Dispatch([...arr], [...topRange, ...bottomRange], [red], [green])
+    );
     k++;
   }
   while (i < left.length) {
@@ -75,7 +72,7 @@ const merge = (arr: number[], dispatcher: DispatcherArray, arrIdx: Indexes) => {
 const mergeSortDispatcher = (arr: number[]) => {
   const dispatcher: DispatcherArray = [];
   mergeSort(arr, dispatcher);
-  dispatcher.push([[...arr], range(0, arr.length), [], [], []]);
+  dispatcher.push(new Dispatch([...arr], range(0, arr.length)));
   return dispatcher;
 };
 
