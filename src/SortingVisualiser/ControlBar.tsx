@@ -128,7 +128,13 @@ function ControlBar({
         ) : (
           <button
             className={runClass}
-            onClick={() => setSelectedAlgo(tempAlgo)}
+            onClick={() =>
+              tempAlgo === ""
+                ? alert(
+                    "Click on one of the sorting algorithms before clicking run."
+                  )
+                : setSelectedAlgo(tempAlgo)
+            }
           >
             Run Algorithm
           </button>
