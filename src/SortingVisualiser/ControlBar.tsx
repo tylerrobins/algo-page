@@ -31,7 +31,7 @@ function ControlBar({
 
   return (
     <div className="flex flex-row mx-12">
-      <div>
+      <div className="py-0.5 mt-5 mx-4">
         <button
           onClick={() => {
             stopClearAlgo();
@@ -43,54 +43,59 @@ function ControlBar({
         </button>
       </div>
       <Separator.Root
-        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-14 data-[orientation=vertical]:w-px mx-[15px]"
-        decorative
-        orientation="vertical"
-      />
-      <div className="py-1">
-        <Button
-          onClick={() => setTempAlgo("bubble")}
-          className="px-4 underline"
-          selected={tempAlgo === "bubble" ? true : false}
-        >
-          Bubble Sort
-        </Button>
-        <Button
-          onClick={() => setTempAlgo("insert")}
-          className="px-4 underline"
-          selected={tempAlgo === "insert" ? true : false}
-        >
-          Insertion Sort
-        </Button>
-        <Button
-          onClick={() => setTempAlgo("merge")}
-          className="px-4 underline"
-          selected={tempAlgo === "merge" ? true : false}
-        >
-          Merge Sort
-        </Button>
-        <Button
-          onClick={() => setTempAlgo("quick")}
-          className="px-4 underline"
-          selected={tempAlgo === "quick" ? true : false}
-        >
-          Quick Sort
-        </Button>
-        <Button
-          onClick={() => setTempAlgo("selection")}
-          className="px-4 underline"
-          selected={tempAlgo === "selection" ? true : false}
-        >
-          Selection Sort
-        </Button>
-      </div>
-      <Separator.Root
-        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-14 data-[orientation=vertical]:w-px mx-[15px]"
+        className="bg-gray-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-16 data-[orientation=vertical]:w-px mx-[15px] mt-2"
         decorative
         orientation="vertical"
       />
       <div className="">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 text-center pb-2">
+          Sorting Algorithms
+        </p>
+        <div>
+          <Button
+            onClick={() => setTempAlgo("bubble")}
+            className="px-4 underline"
+            selected={tempAlgo === "bubble" ? true : false}
+          >
+            Bubble Sort
+          </Button>
+          <Button
+            onClick={() => setTempAlgo("insert")}
+            className="px-4 underline"
+            selected={tempAlgo === "insert" ? true : false}
+          >
+            Insertion Sort
+          </Button>
+          <Button
+            onClick={() => setTempAlgo("merge")}
+            className="px-4 underline"
+            selected={tempAlgo === "merge" ? true : false}
+          >
+            Merge Sort
+          </Button>
+          <Button
+            onClick={() => setTempAlgo("quick")}
+            className="px-4 underline"
+            selected={tempAlgo === "quick" ? true : false}
+          >
+            Quick Sort
+          </Button>
+          <Button
+            onClick={() => setTempAlgo("selection")}
+            className="px-4 underline"
+            selected={tempAlgo === "selection" ? true : false}
+          >
+            Selection Sort
+          </Button>
+        </div>
+      </div>
+      <Separator.Root
+        className="bg-gray-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-16 data-[orientation=vertical]:w-px mx-[15px] mt-2"
+        decorative
+        orientation="vertical"
+      />
+      <div className="py-0.5">
+        <p className="text-sm text-gray-600 text-center">
           Sorting Speed: {tempSortSpeed[0]}
         </p>
         <Slider.Root
@@ -112,12 +117,12 @@ function ControlBar({
         </Slider.Root>
       </div>
       <Separator.Root
-        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-14 data-[orientation=vertical]:w-px mx-[15px]"
+        className="bg-gray-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-16 data-[orientation=vertical]:w-px mx-[15px] mt-2"
         decorative
         orientation="vertical"
       />
 
-      <div className="py-0.5">
+      <div className="py-0.5 mt-5 mx-4">
         {algoRunning ? (
           <button
             className="border-red-600 bg-red-600 border-2 px-3 py-0.5 rounded-md w-40"

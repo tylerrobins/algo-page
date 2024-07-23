@@ -26,7 +26,7 @@ function SortingVisualiser() {
           greyIdxs={greyIdxs}
         />
       </div>
-      <div className="flex justify-center bg-gray-400 w-full text-lg mt-10">
+      <div className="flex justify-center bg-gray-400 w-full text-lg mt-8">
         <ControlBar
           generateSetArry={generateSetArry}
           setSelectedAlgo={setSelectedAlgo}
