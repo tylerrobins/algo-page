@@ -1,37 +1,120 @@
 import { useState } from "react";
+import * as Slider from "@radix-ui/react-slider";
+import * as Separator from "@radix-ui/react-separator";
+import Button from "./AlgoButtonComponent";
 
-function ControlBar({ setSelectedAlgo, stopSorting }: ControlBarProps) {
+function ControlBar({
+  setSelectedAlgo,
+  stopSorting,
+  algoRunning,
+}: ControlBarProps) {
   const [tempAlgo, setTempAlgo] = useState("");
+  const runClass =
+    tempAlgo === ""
+      ? "border-black border-2 px-3 py-0.5 rounded-md w-40"
+      : "border-green-800 text-green-800 border-2 px-3 py-0.5 rounded-md w-40";
 
   return (
-    <div className="w-60 h-screen p-3">
-      <div className="bg-teal-900 w-full h-full rounded-md p-6">
-        <div className="flex flex-col">
-          <select
-            className="flex"
-            onChange={(e) => setTempAlgo(e.target.value)}
-          >
-            <option value=""></option>
-            <option value="bubble">Bubble Sort</option>
-            <option value="insertion">Insertion Sort</option>
-            <option value="merge">Merge Sort</option>
-            <option value="quick">Quick Sort</option>
-            <option value="selection">Selection Sort</option>
-          </select>
+    // <div className="w-screen h-20 p-3">
+    <div className="flex flex-row mx-12">
+      <div>
+        <button className="border-black border-2 px-3 py-0.5 rounded-md w-28">
+          Reset
+        </button>
+      </div>
+      <Separator.Root
+        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-10 data-[orientation=vertical]:w-px mx-[15px]"
+        decorative
+        orientation="vertical"
+      />
+      <div className="py-1">
+        <Button
+          onClick={() => setTempAlgo("bubble")}
+          className="px-4 underline"
+          selected={tempAlgo === "bubble" ? true : false}
+        >
+          Bubble Sort
+        </Button>
+        <Button
+          onClick={() => setTempAlgo("insert")}
+          className="px-4 underline"
+          selected={tempAlgo === "insert" ? true : false}
+        >
+          Insertion Sort
+        </Button>
+        <Button
+          onClick={() => setTempAlgo("merge")}
+          className="px-4 underline"
+          selected={tempAlgo === "merge" ? true : false}
+        >
+          Merge Sort
+        </Button>
+        <Button
+          onClick={() => setTempAlgo("quick")}
+          className="px-4 underline"
+          selected={tempAlgo === "quick" ? true : false}
+        >
+          Quick Sort
+        </Button>
+        <Button
+          onClick={() => setTempAlgo("selection")}
+          className="px-4 underline"
+          selected={tempAlgo === "selection" ? true : false}
+        >
+          Selection Sort
+        </Button>
+      </div>
+      <Separator.Root
+        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-10 data-[orientation=vertical]:w-px mx-[15px]"
+        decorative
+        orientation="vertical"
+      />
+      <div className="">
+        <Slider.Root
+          className="relative flex items-center select-none touch-none w-[200px] h-5 pt-4"
+          defaultValue={[50]}
+          max={100}
+          step={1}
+        >
+          <Slider.Track className="bg-black relative grow rounded-full h-[3px]">
+            <Slider.Range className="absolute bg-green-600 rounded-full h-full" />
+          </Slider.Track>
+          <Slider.Thumb
+            className="block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-black rounded-[10px] hover:bg-green-600 focus:outline-none"
+            aria-label="Volume"
+          />
+        </Slider.Root>
+      </div>
+      <Separator.Root
+        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-10 data-[orientation=vertical]:w-px mx-[15px]"
+        decorative
+        orientation="vertical"
+      />
+
+      <div className="py-0.5">
+        {algoRunning ? (
           <button
-            className="flex"
+            className="border-red-600 text-red-600 border-2 px-3 py-0.5 rounded-md w-40"
+            onClick={() => {
+              stopSorting();
+              setTempAlgo("");
+            }}
+          >
+            Stop
+          </button>
+        ) : (
+          <button
+            className={runClass}
             onClick={() => {
               setSelectedAlgo(tempAlgo);
             }}
           >
             Run Algorithm
           </button>
-          <button className="flex" onClick={stopSorting}>
-            Stop
-          </button>
-        </div>
+        )}
       </div>
     </div>
+    // </div>
   );
 }
 

@@ -15,6 +15,7 @@ export function useSorting() {
   const [orangeIdx, setOrangeIdx] = useState<number[]>([]);
   const [greyIdxs, setGreyIdxs] = useState<number[]>([]);
   const [selectedAlgo, setSelectedAlgo] = useState("");
+  const [algoRunning, setAlgoRunning] = useState(false);
   const stopSortingRef = useRef(false);
   const cleanupRef = useRef<() => void>(() => {});
 
@@ -51,7 +52,8 @@ export function useSorting() {
       setGreenIdx,
       setOrangeIdx,
       stopSortingRef,
-      speed
+      speed,
+      setAlgoRunning
     );
   };
 
@@ -76,6 +78,7 @@ export function useSorting() {
   };
   const stopSorting = () => {
     stopSortingRef.current = true;
+    setAlgoRunning(false);
   };
 
   return {
@@ -86,5 +89,6 @@ export function useSorting() {
     greyIdxs,
     setSelectedAlgo,
     stopSorting,
+    algoRunning,
   };
 }

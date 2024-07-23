@@ -9,4 +9,5 @@ interface BarGraphProps {
 interface ControlBarProps {
   setSelectedAlgo: React.Dispatch<React.SetStateAction<string>>;
   stopSorting: MutableRefObject<boolean>;
+  algoRunning: boolean;
 }

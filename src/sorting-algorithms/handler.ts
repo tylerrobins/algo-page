@@ -9,9 +9,11 @@ const handler = (
   setGreenIdx: React.Dispatch<React.SetStateAction<number[]>>,
   setOrangeIdx: React.Dispatch<React.SetStateAction<number[]>>,
   stopSortingRef: MutableRefObject<boolean>,
-  sortingSpeed: number
+  sortingSpeed: number,
+  setAlgoRunning: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const timeouts: NodeJS.Timeout[] = [];
+  setAlgoRunning(true);
 
   const sortSteps = (idx: number) => {
     if (stopSortingRef.current) {
@@ -36,9 +38,9 @@ const handler = (
     }, i * sortingSpeed);
     timeouts.push(timeout);
   }
-
   return () => {
     timeouts.forEach((timeout) => clearTimeout(timeout));
+    setAlgoRunning(false);
   };
 };
 export default handler;
