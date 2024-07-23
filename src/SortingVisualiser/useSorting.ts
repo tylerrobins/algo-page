@@ -16,27 +16,25 @@ export function useSorting() {
   const [greyIdxs, setGreyIdxs] = useState<number[]>([]);
   const [selectedAlgo, setSelectedAlgo] = useState("");
   const [algoRunning, setAlgoRunning] = useState(false);
+  const [sortingSpeed, setSortingSpeed] = useState(20);
   const stopSortingRef = useRef(false);
   const cleanupRef = useRef<() => void>(() => {});
 
   useEffect(() => {
-    const genArray = generateArr();
-    setArray(genArray);
+    generateSetArry();
   }, []);
 
   useEffect(() => {
     if (selectedAlgo === "bubble") {
-      bubbleSortHandler();
-    } else if (selectedAlgo === "insertion") {
-      insertionSortHandler();
+      startSorting(bubbleQueue(array), sortingSpeed);
+    } else if (selectedAlgo === "insert") {
+      startSorting(insertionQueue(array), sortingSpeed);
     } else if (selectedAlgo === "merge") {
-      mergeSortHandler();
+      startSorting(mergeQueue(array), sortingSpeed);
     } else if (selectedAlgo === "quick") {
-      quickSortHandler();
+      startSorting(quickQueue(array), sortingSpeed);
     } else if (selectedAlgo === "selection") {
-      selectionSortHandler();
-    } else {
-      console.error("Invalid Algorithm input!");
+      startSorting(selectionQueue(array), sortingSpeed);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAlgo]);
@@ -57,28 +55,14 @@ export function useSorting() {
     );
   };
 
-  const selectionSortHandler = () => {
-    startSorting(selectionQueue(array), 15);
-  };
-
-  const bubbleSortHandler = () => {
-    startSorting(bubbleQueue(array), 15);
-  };
-
-  const insertionSortHandler = () => {
-    startSorting(insertionQueue(array), 40);
-  };
-
-  const mergeSortHandler = () => {
-    startSorting(mergeQueue(array), 30);
-  };
-
-  const quickSortHandler = () => {
-    startSorting(quickQueue(array), 30);
-  };
   const stopSorting = () => {
     stopSortingRef.current = true;
     setAlgoRunning(false);
+  };
+
+  const generateSetArry = () => {
+    const genArray = generateArr();
+    setArray(genArray);
   };
 
   return {
@@ -87,7 +71,9 @@ export function useSorting() {
     greenIdx,
     orangeIdx,
     greyIdxs,
+    generateSetArry,
     setSelectedAlgo,
+    setSortingSpeed,
     stopSorting,
     algoRunning,
   };

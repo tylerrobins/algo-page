@@ -9,13 +9,15 @@ function SortingVisualiser() {
     greenIdx,
     orangeIdx,
     greyIdxs,
+    generateSetArry,
     setSelectedAlgo,
+    setSortingSpeed,
     stopSorting,
     algoRunning,
   } = useSorting();
   return (
     <div className="flex flex-col h-screen bg-gray-400">
-      <div className="flex min-h-[830px] justify-center items-end bg-white mx-24 mt-10 p-8 rounded-xl">
+      <div className="flex min-h-[830px] justify-center items-end bg-white mx-24 mt-10 pb-14 rounded-xl shadow-xl">
         <BarGraph
           array={array}
           redIdx={redIdx}
@@ -24,9 +26,11 @@ function SortingVisualiser() {
           greyIdxs={greyIdxs}
         />
       </div>
-      <div className="flex justify-center bg-gray-400 w-full h-52 text-lg mt-10">
+      <div className="flex justify-center bg-gray-400 w-full text-lg mt-10">
         <ControlBar
+          generateSetArry={generateSetArry}
           setSelectedAlgo={setSelectedAlgo}
+          setSortingSpeed={setSortingSpeed}
           stopSorting={stopSorting}
           algoRunning={algoRunning}
         />

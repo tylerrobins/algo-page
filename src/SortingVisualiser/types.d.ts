@@ -7,7 +7,9 @@ interface BarGraphProps {
 }
 
 interface ControlBarProps {
+  generateSetArry: () => void;
   setSelectedAlgo: React.Dispatch<React.SetStateAction<string>>;
+  setSortingSpeed: React.Dispatch<React.SetStateAction<number>>;
   stopSorting: MutableRefObject<boolean>;
   algoRunning: boolean;
 }

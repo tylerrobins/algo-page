@@ -4,26 +4,46 @@ import * as Separator from "@radix-ui/react-separator";
 import Button from "./AlgoButtonComponent";
 
 function ControlBar({
+  generateSetArry,
   setSelectedAlgo,
+  setSortingSpeed,
   stopSorting,
   algoRunning,
 }: ControlBarProps) {
   const [tempAlgo, setTempAlgo] = useState("");
+  const [tempSortSpeed, setTempSortingSpeed] = useState([5]);
   const runClass =
     tempAlgo === ""
       ? "border-black border-2 px-3 py-0.5 rounded-md w-40"
-      : "border-green-800 text-green-800 border-2 px-3 py-0.5 rounded-md w-40";
+      : "border-green-800 text-white border-2 px-3 py-0.5 rounded-md w-40 bg-green-800";
+
+  const sortingSpeed = (e: number[]) => {
+    const val = e[0];
+    const speed = 200 + -22 * (val - 1);
+    setSortingSpeed(speed);
+  };
+
+  const stopClearAlgo = () => {
+    stopSorting();
+    setTempAlgo("");
+    setSelectedAlgo("");
+  };
 
   return (
-    // <div className="w-screen h-20 p-3">
     <div className="flex flex-row mx-12">
       <div>
-        <button className="border-black border-2 px-3 py-0.5 rounded-md w-28">
+        <button
+          onClick={() => {
+            stopClearAlgo();
+            generateSetArry();
+          }}
+          className="border-black border-2 px-3 py-0.5 rounded-md w-28"
+        >
           Reset
         </button>
       </div>
       <Separator.Root
-        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-10 data-[orientation=vertical]:w-px mx-[15px]"
+        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-14 data-[orientation=vertical]:w-px mx-[15px]"
         decorative
         orientation="vertical"
       />
@@ -65,16 +85,22 @@ function ControlBar({
         </Button>
       </div>
       <Separator.Root
-        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-10 data-[orientation=vertical]:w-px mx-[15px]"
+        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-14 data-[orientation=vertical]:w-px mx-[15px]"
         decorative
         orientation="vertical"
       />
       <div className="">
+        <p className="text-sm text-gray-600">
+          Sorting Speed: {tempSortSpeed[0]}
+        </p>
         <Slider.Root
           className="relative flex items-center select-none touch-none w-[200px] h-5 pt-4"
-          defaultValue={[50]}
-          max={100}
+          defaultValue={[5]}
+          max={10}
+          min={1}
           step={1}
+          onValueChange={(e) => setTempSortingSpeed(e)}
+          onValueCommit={(e) => sortingSpeed(e)}
         >
           <Slider.Track className="bg-black relative grow rounded-full h-[3px]">
             <Slider.Range className="absolute bg-green-600 rounded-full h-full" />
@@ -86,7 +112,7 @@ function ControlBar({
         </Slider.Root>
       </div>
       <Separator.Root
-        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-10 data-[orientation=vertical]:w-px mx-[15px]"
+        className="bg-gray-600 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-14 data-[orientation=vertical]:w-px mx-[15px]"
         decorative
         orientation="vertical"
       />
@@ -94,27 +120,21 @@ function ControlBar({
       <div className="py-0.5">
         {algoRunning ? (
           <button
-            className="border-red-600 text-red-600 border-2 px-3 py-0.5 rounded-md w-40"
-            onClick={() => {
-              stopSorting();
-              setTempAlgo("");
-            }}
+            className="border-red-600 bg-red-600 border-2 px-3 py-0.5 rounded-md w-40"
+            onClick={stopClearAlgo}
           >
             Stop
           </button>
         ) : (
           <button
             className={runClass}
-            onClick={() => {
-              setSelectedAlgo(tempAlgo);
-            }}
+            onClick={() => setSelectedAlgo(tempAlgo)}
           >
             Run Algorithm
           </button>
         )}
       </div>
     </div>
-    // </div>
   );
 }
 
