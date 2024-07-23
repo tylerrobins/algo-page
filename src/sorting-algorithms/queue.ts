@@ -1,4 +1,4 @@
-class Dispatch {
+class Queue {
   private currentArr: number[];
   private colors: { [key: string]: number[] };
 
@@ -40,4 +40,4 @@ class Dispatch {
   }
 }
 
-export default Dispatch;
+export default Queue;

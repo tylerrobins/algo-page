@@ -1,10 +1,10 @@
-import Dispatch from "./dispatch";
-import { DispatcherArray } from "./types";
+import type { QueueArray } from "./types";
+import Queue from "./queue";
 
-function insertionDispatcher(array: number[]): DispatcherArray {
+function insertionQueue(array: number[]): QueueArray {
   const currArray = [...array];
   const n = currArray.length;
-  const dispatcher: DispatcherArray = [];
+  const queue: QueueArray = [];
 
   let i, key, j;
   for (i = 1; i < n; i++) {
@@ -13,8 +13,8 @@ function insertionDispatcher(array: number[]): DispatcherArray {
     while (j >= 0 && currArray[j] > key) {
       currArray[j + 1] = currArray[j];
       j = j - 1;
-      dispatcher.push(
-        new Dispatch(
+      queue.push(
+        new Queue(
           [...currArray],
           j >= 0 ? [...Array(j + 1).keys()] : [],
           [j + 1],
@@ -23,8 +23,8 @@ function insertionDispatcher(array: number[]): DispatcherArray {
         )
       );
     }
-    dispatcher.push(
-      new Dispatch(
+    queue.push(
+      new Queue(
         [...currArray],
         j >= 0 ? [...Array(j + 1).keys()] : [],
         [],
@@ -34,10 +34,8 @@ function insertionDispatcher(array: number[]): DispatcherArray {
     );
     currArray[j + 1] = key;
   }
-  dispatcher.push(
-    new Dispatch([...currArray], [...Array(n).keys()], [], [], [])
-  );
-  return dispatcher;
+  queue.push(new Queue([...currArray], [...Array(n).keys()], [], [], []));
+  return queue;
 }
 
-export default insertionDispatcher;
+export default insertionQueue;

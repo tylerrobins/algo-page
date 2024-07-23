@@ -1,5 +1,5 @@
 import generateArr from "../src/functions/generate-array";
-import bubbleDispatcher from "../src/sorting-algorithms/bubbleDispatcher";
+import bubbleDispatcher from "../src/sorting-algorithms/bubbleQueue";
 
 const testArrs: number[][] = [];
 for (let i = 0; i < 100; i++) {

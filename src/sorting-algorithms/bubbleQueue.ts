@@ -1,11 +1,11 @@
-import { DispatcherArray } from "./types";
+import type { QueueArray } from "./types";
 import range from "../functions/arr-range";
-import Dispatch from "./dispatch";
+import Queue from "./queue";
 
-const bubbleDispatcher = (arr: number[]): DispatcherArray => {
+const bubbleQueue = (arr: number[]): QueueArray => {
   const currArr = [...arr];
   const n = currArr.length;
-  const dispatcher: DispatcherArray = [];
+  const queue: QueueArray = [];
 
   let i: number, j: number, swapped: boolean;
   for (i = 0; i < n - 1; i++) {
@@ -15,19 +15,19 @@ const bubbleDispatcher = (arr: number[]): DispatcherArray => {
       if (currArr[j] > currArr[nextIdx]) {
         [[currArr[j], currArr[nextIdx]]] = [[currArr[nextIdx], currArr[j]]];
         swapped = true;
-        dispatcher.push(
-          new Dispatch([...currArr], range(n - i, n - 1), [j], [nextIdx], [])
+        queue.push(
+          new Queue([...currArr], range(n - i, n - 1), [j], [nextIdx], [])
         );
       } else {
-        new Dispatch([...currArr], range(n - i, n - 1), [nextIdx], [j], []);
+        new Queue([...currArr], range(n - i, n - 1), [nextIdx], [j], []);
       }
     }
     if (!swapped) {
       break;
     }
   }
-  dispatcher.push(new Dispatch([...currArr], range(0, n)));
-  return dispatcher;
+  queue.push(new Queue([...currArr], range(0, n)));
+  return queue;
 };
 
-export default bubbleDispatcher;
+export default bubbleQueue;

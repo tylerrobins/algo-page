@@ -1,12 +1,12 @@
+import type { QueueArray } from "../sorting-algorithms/types";
 import { useEffect, useState, useRef } from "react";
 import generateArr from "../functions/generate-array";
 import handler from "../sorting-algorithms/handler";
-import selectionDispatcher from "../sorting-algorithms/selectionDispatcher";
-import bubbleDispatcher from "../sorting-algorithms/bubbleDispatcher";
-import insertionDispatcher from "../sorting-algorithms/insertionDispatcher";
-import mergeDispatcher from "../sorting-algorithms/mergeDispatcher";
-import quickDispatcher from "../sorting-algorithms/quickDispatcher";
-import { DispatcherArray } from "../sorting-algorithms/types";
+import selectionQueue from "../sorting-algorithms/selectionQueue";
+import bubbleQueue from "../sorting-algorithms/bubbleQueue";
+import insertionQueue from "../sorting-algorithms/insertionQueue";
+import mergeQueue from "../sorting-algorithms/mergeQueue";
+import quickQueue from "../sorting-algorithms/quickQueue";
 
 export function useSorting() {
   const [array, setArray] = useState<number[]>([]);
@@ -40,11 +40,11 @@ export function useSorting() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAlgo]);
 
-  const startSorting = (dispatcher: DispatcherArray, speed: number) => {
+  const startSorting = (queue: QueueArray, speed: number) => {
     stopSortingRef.current = false;
     cleanupRef.current();
     cleanupRef.current = handler(
-      dispatcher,
+      queue,
       setArray,
       setGreyIdxs,
       setRedIdx,
@@ -56,23 +56,23 @@ export function useSorting() {
   };
 
   const selectionSortHandler = () => {
-    startSorting(selectionDispatcher(array), 15);
+    startSorting(selectionQueue(array), 15);
   };
 
   const bubbleSortHandler = () => {
-    startSorting(bubbleDispatcher(array), 15);
+    startSorting(bubbleQueue(array), 15);
   };
 
   const insertionSortHandler = () => {
-    startSorting(insertionDispatcher(array), 40);
+    startSorting(insertionQueue(array), 40);
   };
 
   const mergeSortHandler = () => {
-    startSorting(mergeDispatcher(array), 30);
+    startSorting(mergeQueue(array), 30);
   };
 
   const quickSortHandler = () => {
-    startSorting(quickDispatcher(array), 30);
+    startSorting(quickQueue(array), 30);
   };
   const stopSorting = () => {
     stopSortingRef.current = true;

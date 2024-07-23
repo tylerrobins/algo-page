@@ -1,6 +1,6 @@
-import { DispatcherArray } from "./types";
+import type { QueueArray } from "./types";
+import Queue from "./queue";
 import range from "../functions/arr-range";
-import Dispatch from "./dispatch";
 
 class Indexes {
   lowerBound: number;
@@ -16,20 +16,20 @@ class Indexes {
 
 const mergeSort = (
   arr: number[],
-  dispatcher: DispatcherArray,
+  queue: QueueArray,
   idx: Indexes = new Indexes(0, arr.length - 1)
 ): number[] => {
   if (idx.upperBound - idx.lowerBound + 1 < 2) {
     return arr;
   }
-  mergeSort(arr, dispatcher, new Indexes(idx.lowerBound, idx.middle));
-  mergeSort(arr, dispatcher, new Indexes(idx.middle + 1, idx.upperBound));
-  merge(arr, dispatcher, idx);
+  mergeSort(arr, queue, new Indexes(idx.lowerBound, idx.middle));
+  mergeSort(arr, queue, new Indexes(idx.middle + 1, idx.upperBound));
+  merge(arr, queue, idx);
 
   return arr;
 };
 
-const merge = (arr: number[], dispatcher: DispatcherArray, arrIdx: Indexes) => {
+const merge = (arr: number[], queue: QueueArray, arrIdx: Indexes) => {
   const left = arr.slice(arrIdx.lowerBound, arrIdx.middle + 1);
   const right = arr.slice(arrIdx.middle + 1, arrIdx.upperBound + 1);
   let i = 0;
@@ -51,8 +51,8 @@ const merge = (arr: number[], dispatcher: DispatcherArray, arrIdx: Indexes) => {
     }
     const topRange = range(arrIdx.lowerBound, arrIdx.middle);
     const bottomRange = range(arrIdx.middle + 1, arrIdx.upperBound);
-    dispatcher.push(
-      new Dispatch([...arr], [...topRange, ...bottomRange], [red], [green])
+    queue.push(
+      new Queue([...arr], [...topRange, ...bottomRange], [red], [green])
     );
     k++;
   }
@@ -69,11 +69,11 @@ const merge = (arr: number[], dispatcher: DispatcherArray, arrIdx: Indexes) => {
   }
 };
 
-const mergeSortDispatcher = (arr: number[]) => {
-  const dispatcher: DispatcherArray = [];
-  mergeSort(arr, dispatcher);
-  dispatcher.push(new Dispatch([...arr], range(0, arr.length)));
-  return dispatcher;
+const mergeSortQueue = (arr: number[]) => {
+  const queue: QueueArray = [];
+  mergeSort(arr, queue);
+  queue.push(new Queue([...arr], range(0, arr.length)));
+  return queue;
 };
 
-export default mergeSortDispatcher;
+export default mergeSortQueue;

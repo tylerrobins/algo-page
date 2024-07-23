@@ -1,3 +1,3 @@
-import Dispatch from "./dispatch";
+import Queue from "./queue";
 
-export type DispatcherArray = Array<Dispatch>;
+export type QueueArray = Array<Queue>;

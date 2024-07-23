@@ -1,8 +1,8 @@
 import { MutableRefObject } from "react";
-import { DispatcherArray } from "./types";
+import type { QueueArray } from "./types";
 
 const handler = (
-  dispatcherArray: DispatcherArray,
+  queueArray: QueueArray,
   setArray: React.Dispatch<React.SetStateAction<number[]>>,
   setGreyIdxs: React.Dispatch<React.SetStateAction<number[]>>,
   setRedIdx: React.Dispatch<React.SetStateAction<number[]>>,
@@ -21,15 +21,15 @@ const handler = (
       setRedIdx([]);
       return;
     }
-    const dispatcherJob = dispatcherArray[idx];
-    setArray(dispatcherJob.getCurrentArr());
-    setGreyIdxs(dispatcherJob.getColor("grey"));
-    setOrangeIdx(dispatcherJob.getColor("orange"));
-    setGreenIdx(dispatcherJob.getColor("green"));
-    setRedIdx(dispatcherJob.getColor("red"));
+    const queueJob = queueArray[idx];
+    setArray(queueJob.getCurrentArr());
+    setGreyIdxs(queueJob.getColor("grey"));
+    setOrangeIdx(queueJob.getColor("orange"));
+    setGreenIdx(queueJob.getColor("green"));
+    setRedIdx(queueJob.getColor("red"));
   };
 
-  const n = dispatcherArray.length;
+  const n = queueArray.length;
   for (let i = 0; i < n; i++) {
     const timeout = setTimeout(() => {
       sortSteps(i);
