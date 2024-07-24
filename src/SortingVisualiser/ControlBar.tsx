@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
 import * as Separator from "@radix-ui/react-separator";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
@@ -28,12 +28,13 @@ function ControlBar({
 
   const stopClearAlgo = () => {
     stopSorting();
-    setTempAlgo("");
+
     setSelectedAlgo("");
   };
 
+  const newLocal = "flex flex-row mx-12";
   return (
-    <div className="flex flex-row mx-12">
+    <div className={newLocal}>
       <div className="py-0.5 mt-5 mx-4">
         <button
           onClick={() => {

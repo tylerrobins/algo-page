@@ -35,6 +35,9 @@ const handler = (
   for (let i = 0; i < n; i++) {
     const timeout = setTimeout(() => {
       sortSteps(i);
+      if (i === n - 1) {
+        setAlgoRunning(false);
+      }
     }, i * sortingSpeed);
     timeouts.push(timeout);
   }

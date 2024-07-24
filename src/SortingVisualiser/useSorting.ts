@@ -57,6 +57,10 @@ export function useSorting() {
 
   const stopSorting = () => {
     stopSortingRef.current = true;
+    setRedIdx([]);
+    setGreenIdx([]);
+    setOrangeIdx([]);
+    setGreyIdxs([]);
     setAlgoRunning(false);
   };
 
