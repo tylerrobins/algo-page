@@ -16,7 +16,7 @@ function SortingVisualiser() {
     algoRunning,
   } = useSorting();
   return (
-    <div className="flex flex-col h-screen bg-gray-400">
+    <div className="flex flex-col h-screen bg-gray-300">
       <div className="flex min-h-[830px] justify-center items-end bg-white mx-24 mt-10 pb-14 rounded-xl shadow-xl">
         <BarGraph
           array={array}
@@ -26,7 +26,7 @@ function SortingVisualiser() {
           greyIdxs={greyIdxs}
         />
       </div>
-      <div className="flex justify-center bg-gray-400 w-full text-lg mt-8">
+      <div className="flex justify-center w-full text-lg mt-8">
         <ControlBar
           generateSetArry={generateSetArry}
           setSelectedAlgo={setSelectedAlgo}

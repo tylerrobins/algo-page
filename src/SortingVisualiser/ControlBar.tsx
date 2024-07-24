@@ -1,7 +1,10 @@
 import { useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
 import * as Separator from "@radix-ui/react-separator";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
+import * as HoverCard from "@radix-ui/react-hover-card";
 import Button from "./AlgoButtonComponent";
+import { BubbleSort } from "./SortingAlgoInfo";
 
 function ControlBar({
   generateSetArry,
@@ -14,7 +17,7 @@ function ControlBar({
   const [tempSortSpeed, setTempSortingSpeed] = useState([5]);
   const runClass =
     tempAlgo === ""
-      ? "border-black border-2 px-3 py-0.5 rounded-md w-40"
+      ? "border-gray-400 text-gray-400 border-2 px-3 py-0.5 rounded-md w-40"
       : "border-green-800 text-white border-2 px-3 py-0.5 rounded-md w-40 bg-green-800";
 
   const sortingSpeed = (e: number[]) => {
@@ -48,9 +51,32 @@ function ControlBar({
         orientation="vertical"
       />
       <div className="">
-        <p className="text-sm text-gray-600 text-center pb-2">
-          Sorting Algorithms
-        </p>
+        <div className="flex flex-row justify-center pb-2">
+          {tempAlgo !== "" ? (
+            <p className="text-sm text-gray-500">Sorting Algorithms</p>
+          ) : (
+            <>
+              <p className="text-sm text-gray-500">Sorting Algorithms: </p>
+              <div className="pt-0.5">
+                <HoverCard.Root>
+                  <HoverCard.Trigger>
+                    <InfoCircledIcon />
+                  </HoverCard.Trigger>
+                  <HoverCard.Portal>
+                    <HoverCard.Content
+                      className="data-[side=bottom]:animate-slideUpAndFade data-[side=right]:animate-slideLeftAndFade data-[side=left]:animate-slideRightAndFade data-[side=top]:animate-slideDownAndFade w-[600px] rounded-md bg-white p-5 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] data-[state=open]:transition-all"
+                      sideOffset={5}
+                      side="top"
+                    >
+                      <BubbleSort />
+                    </HoverCard.Content>
+                  </HoverCard.Portal>
+                </HoverCard.Root>
+              </div>
+            </>
+          )}
+        </div>
+
         <div>
           <Button
             onClick={() => setTempAlgo("bubble")}
@@ -95,7 +121,7 @@ function ControlBar({
         orientation="vertical"
       />
       <div className="py-0.5">
-        <p className="text-sm text-gray-600 text-center">
+        <p className="text-sm text-gray-500 text-center">
           Sorting Speed: {tempSortSpeed[0]}
         </p>
         <Slider.Root
