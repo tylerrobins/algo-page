@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
 import * as Separator from "@radix-ui/react-separator";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
