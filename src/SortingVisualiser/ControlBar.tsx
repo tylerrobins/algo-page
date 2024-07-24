@@ -4,7 +4,7 @@ import * as Separator from "@radix-ui/react-separator";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import Button from "./AlgoButtonComponent";
-import { BubbleSort } from "./SortingAlgoInfo";
+import AlgoInfo from "./SortingAlgoInfo";
 
 function ControlBar({
   generateSetArry,
@@ -52,7 +52,7 @@ function ControlBar({
       />
       <div className="">
         <div className="flex flex-row justify-center pb-2">
-          {tempAlgo !== "" ? (
+          {tempAlgo === "" ? (
             <p className="text-sm text-gray-500">Sorting Algorithms</p>
           ) : (
             <>
@@ -68,7 +68,7 @@ function ControlBar({
                       sideOffset={5}
                       side="top"
                     >
-                      <BubbleSort />
+                      <AlgoInfo algorithm={tempAlgo} />
                     </HoverCard.Content>
                   </HoverCard.Portal>
                 </HoverCard.Root>
