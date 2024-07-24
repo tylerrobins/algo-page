@@ -10,6 +10,8 @@ for (let i = 0; i < testArrs.length; i++) {
   test(`Bubble sort dispatcher, test ${i}`, () => {
     const dispatcherTest = bubbleDispatcher(testArrs[i]);
     const sortedTestArr = testArrs[i].sort((a, b) => a - b);
-    expect(dispatcherTest[dispatcherTest.length - 1][0]).toEqual(sortedTestArr);
+    expect(dispatcherTest[dispatcherTest.length - 1].getCurrentArr()).toEqual(
+      sortedTestArr
+    );
   });
 }
