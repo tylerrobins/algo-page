@@ -8,3 +8,6 @@ The purpose of this web app is to allow for visualisation of various sorting alg
 - Typescript
 - Tailwind
 - Jest - Babel
+
+# GITHUB Page
+https://tylerrobins.github.io/algo-page/
